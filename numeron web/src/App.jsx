@@ -1,13 +1,13 @@
 import { useState } from 'react'
 import Bisection from './Bisection'
-import './App.css'
-
+// import './App.css'
+import "bootstrap/dist/css/bootstrap.min.css";
 function App() {
   const [count, setCount] = useState(0)
 
   return (
-    <><Bisection/></>  
-      
+    <div><Bisection></Bisection></div>
+
   )
 }
 
