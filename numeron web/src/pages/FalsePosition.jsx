@@ -2,7 +2,7 @@ import { useState } from "react"
 import { Button, Container, Form, Table } from "react-bootstrap";
 import { evaluate } from 'mathjs'
 
-const Bisection =()=>{
+const FalsePosition =()=>{
     const print = () =>{
         console.log(data)
         setValueIter(data.map((x)=>x.iteration));
@@ -16,7 +16,7 @@ const Bisection =()=>{
                         <tr>
                             <th width="10%">Iteration</th>
                             <th width="30%">XL</th>
-                            <th width="30%">XM</th>
+                            <th width="30%">X</th>
                             <th width="30%">XR</th>
                         </tr>
                     </thead>
@@ -40,23 +40,31 @@ const Bisection =()=>{
     const error =(xold, xnew)=> Math.abs((xnew-xold)/xnew)*100;
    
     const Calbisection = (xl, xr) => {
-        var xm,fXm,fXr,ea,scope;
+        var xm,fXm,fXr,fXl,ea,scope;
         var iter = 0;
         var MAX = 50;
         const e = 0.00001;
         var obj={};
         do
         {
-            xm = (xl+xr)/2.0;
             scope = {
                 x:xr,
             }
             fXr = evaluate(Equation, scope)
 
             scope = {
+                x:xl,
+            }
+            fXl = evaluate(Equation, scope)
+
+            xm = (xl*fXr-xr*fXl)/(fXr-fXl);
+
+            scope = {
                 x:xm,
             }
             fXm = evaluate(Equation, scope)
+
+            
 
             iter ++;
             if (fXm*fXr > 0)
@@ -128,9 +136,10 @@ const Bisection =()=>{
 
     return (
             <Container>
+                <div className="layout"><h1>False position</h1></div>
                 <Form >
                     <Form.Group className="mb-3">
-                    <Form.Label>Input f(x)</Form.Label>
+                        <Form.Label>Input f(x)</Form.Label>
                         <input type="text" id="equation" value={Equation} onChange={inputEquation} style={{width:"20%", margin:"0 auto"}} className="form-control"></input>
                         <Form.Label>Input XL</Form.Label>
                         <input type="number" id="XL" onChange={inputXL} style={{width:"20%", margin:"0 auto"}} className="form-control"></input>
@@ -152,4 +161,4 @@ const Bisection =()=>{
     )
 }
 
-export default Bisection
+export default FalsePosition

@@ -1,13 +1,27 @@
 import { useState } from 'react'
-import Bisection from './Bisection'
-// import './App.css'
+import './App.css'
 import "bootstrap/dist/css/bootstrap.min.css";
+import { Route, Routes } from 'react-router-dom';
+import Navbar from './Navbar';
+import Entity404 from './entity404';
+import Bisection from './pages/Bisection'
+import FalsePosition from './pages/FalsePosition';
+import Home from './pages/Home';
 function App() {
   const [count, setCount] = useState(0)
 
   return (
-    <div><Bisection></Bisection></div>
-
+    <div>
+      <Navbar/>
+      <div className='phase'>
+        <Routes>
+          <Route path='/' element={<Home/>}></Route>
+          <Route path='/Bisection' element={<Bisection/>}></Route>
+          <Route path='/FalsePosition' element={<FalsePosition/>}></Route>
+          <Route path='*' element={<Entity404/>}></Route>
+        </Routes>
+      </div>
+    </div>
   )
 }
 

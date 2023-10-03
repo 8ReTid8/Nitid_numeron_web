@@ -1,0 +1,27 @@
+@import url('https://fonts.googleapis.com/css2?family=Silkscreen&display=swap');
+
+.phase{
+    padding-top: 2rem;
+}
+
+.layout{
+    font-family: "Silkscreen";
+    display: flex;
+    justify-content: center;
+    padding-bottom: 2rem;
+}
+
+.layouthome{
+    font-family: "Silkscreen";
+    display: flex;
+    justify-content: center;
+    font-size: 8rem;
+    padding-top: 12rem;
+    white-space: nowrap;
+}
+@media screen and (max-width:1024px){
+    .layouthome{
+        font-size: 2rem;
+        text-align: center;
+    }
+}
