@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { Button, Container, Form, Table } from "react-bootstrap";
+import { Button, Container, Form, Table,Row } from "react-bootstrap";
 import { evaluate } from 'mathjs'
 
 const Bisection =()=>{
@@ -122,35 +122,38 @@ const Bisection =()=>{
      
         setHtml(print());
            
-        console.log(valueIter)
-        console.log(valueXl)
+        // console.log(valueIter)
+        // console.log(valueXl)
     }
-
     return (
-            <Container>
-                <div className="layout"><h1>Bisection</h1></div>
+        <Container>
+            <div className="layout"><h1>Bisection</h1></div>
+            <div className="alignown">
                 <Form >
-                    <Form.Group className="mb-3">
-                    <Form.Label>Input f(x)</Form.Label>
-                        <input type="text" id="equation" value={Equation} onChange={inputEquation} style={{width:"20%", margin:"0 auto"}} className="form-control"></input>
-                        <Form.Label>Input XL</Form.Label>
-                        <input type="number" id="XL" onChange={inputXL} style={{width:"20%", margin:"0 auto"}} className="form-control"></input>
-                        <Form.Label>Input XR</Form.Label>
-                        <input type="number" id="XR" onChange={inputXR} style={{width:"20%", margin:"0 auto"}} className="form-control"></input>
+                    <Form.Group className="mb-3" as={Row}>
+                        <Form.Label>Input f(x)</Form.Label>
+                        <input type="text" id="equation" value={Equation} onChange={inputEquation} style={{width:"100%", margin:"0 auto"}} className="form-control"></input>
                     </Form.Group>
-                    <Button variant="dark" onClick={calculateRoot}>
-                        Calculate
-                    </Button>
+                    <Form.Group className="mb-3" as={Row}>    
+                        <Form.Label>Input XL</Form.Label>
+                        <input type="number" id="XL" onChange={inputXL} style={{width:"100%", margin:"0 auto"}} className="form-control"></input>
+                    </Form.Group>  
+                    <Form.Group className="mb-3" as={Row}>  
+                        <Form.Label>Input XR</Form.Label>
+                        <input type="number" id="XR" onChange={inputXR} style={{width:"100%", margin:"0 auto"}} className="form-control"></input>
+                    </Form.Group>
+                    <div className="alignown">
+                        <Button variant="dark" onClick={calculateRoot}>
+                            Calculate
+                        </Button>
+                    </div>
                 </Form>
-                <br></br>
-                <h5>Answer = {X.toPrecision(7)}</h5>
-                <Container>
-                {html}
-                </Container>
-               
-            </Container>
+            </div>
+            <br></br>
+            <h5>Answer = {X.toPrecision(7)}</h5>
+            <Row>{html}</Row>
            
+        </Container>     
     )
 }
-
 export default Bisection

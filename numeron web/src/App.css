@@ -1,5 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Silkscreen&display=swap');
 
+.setfontsilk{
+    font-family: "Silkscreen" ;
+}
+
 .phase{
     padding-top: 2rem;
 }
@@ -24,4 +28,9 @@
         font-size: 2rem;
         text-align: center;
     }
+}
+
+.alignown{
+    display: flex;
+    justify-content: center;
 }
