@@ -17,6 +17,7 @@ function myNavbar() {
             <Nav className="me-auto">
 
               <NavDropdown title="Root of Equation" id="basic-nav-dropdown"  className="setfontsilk">
+                <NavDropdown.Item href="Graphical">Graphical Method</NavDropdown.Item>
                 <NavDropdown.Item href="Bisection">Bisection Method</NavDropdown.Item>
                 <NavDropdown.Item href="Falseposition">False position Method</NavDropdown.Item>
                 <NavDropdown.Item href="Onepoint">One point iteration Method</NavDropdown.Item>

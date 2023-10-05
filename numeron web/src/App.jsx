@@ -7,6 +7,8 @@ import Entity404 from './entity404';
 import Bisection from './pages/Bisection'
 import FalsePosition from './pages/FalsePosition';
 import Onepoint from './pages/Onepoint';
+import Graphical from './pages/Graphical';
+
 import Home from './pages/Home';
 function App() {
   const [count, setCount] = useState(0)
@@ -16,7 +18,9 @@ function App() {
       <Navbar/>
       <div className='phase'>
         <Routes>
+
           <Route path='/' element={<Home/>}></Route>
+          <Route path='/Graphical' element={<Graphical/>}></Route>
           <Route path='/Bisection' element={<Bisection/>}></Route>
           <Route path='/FalsePosition' element={<FalsePosition/>}></Route>
           <Route path='/Onepoint' element={<Onepoint/>}></Route>
