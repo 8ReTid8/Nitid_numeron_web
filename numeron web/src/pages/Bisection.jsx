@@ -12,7 +12,7 @@ const Bisection =()=>{
         return(
             <Container>
                 <Table striped bordered hover variant="dark">
-                    <thead>
+                    <thead align="center">
                         <tr>
                             <th width="10%">Iteration</th>
                             <th width="30%">XL</th>
@@ -20,7 +20,7 @@ const Bisection =()=>{
                             <th width="30%">XR</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody align="center">
                         {data.map((element, index)=>{
                             return  (
                             <tr key={index}>

@@ -61,14 +61,14 @@ const Graphical =()=>{
         return(
             <Container>
                 <Table striped bordered hover variant="dark">
-                    <thead>
+                    <thead align="center">
                         <tr>
                             <th width="10%">Iteration</th>
                             <th width="45%">X</th>
                             <th width="45%">Y</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody align="center">
                         {data.map((element, index)=>{
                             return  (
                             <tr key={index}>

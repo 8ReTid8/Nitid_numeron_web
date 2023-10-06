@@ -21,8 +21,8 @@ function myNavbar() {
                 <NavDropdown.Item href="Bisection">Bisection Method</NavDropdown.Item>
                 <NavDropdown.Item href="Falseposition">False position Method</NavDropdown.Item>
                 <NavDropdown.Item href="Onepoint">One point iteration Method</NavDropdown.Item>
-                <NavDropdown.Item href="action/3.4">Newton Raphson</NavDropdown.Item>
-                <NavDropdown.Item href="action/3.5">Secant Method</NavDropdown.Item>
+                <NavDropdown.Item href="Newton Raphson">Newton Raphson Method</NavDropdown.Item>
+                <NavDropdown.Item href="Secant">Secant Method</NavDropdown.Item>
               </NavDropdown>
 
               <NavDropdown title="Dropdown" id="basic-nav-dropdown"  className="setfontsilk">

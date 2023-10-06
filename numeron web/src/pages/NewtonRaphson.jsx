@@ -1,8 +1,8 @@
 import { useState } from "react"
 import { Button, Container, Form, Table,Row } from "react-bootstrap";
-import { evaluate } from 'mathjs'
+import { evaluate,derivative } from 'mathjs'
 
-const FalsePosition =()=>{
+const NewtonRaphson =()=>{
     const print = () =>{
         console.log(data)
         return(
@@ -11,9 +11,7 @@ const FalsePosition =()=>{
                     <thead align="center">
                         <tr>
                             <th width="10%">Iteration</th>
-                            <th width="30%">XL</th>
-                            <th width="30%">X</th>
-                            <th width="30%">XR</th>
+                            <th width="45%">X</th>
                         </tr>
                     </thead>
                     <tbody align="center">
@@ -21,9 +19,7 @@ const FalsePosition =()=>{
                             return  (
                             <tr key={index}>
                                 <td>{element.iteration}</td>
-                                <td>{element.Xl}</td>
                                 <td>{element.X}</td>
-                                <td>{element.Xr}</td>
                             </tr>)
                         })}
                     </tbody>
@@ -34,74 +30,56 @@ const FalsePosition =()=>{
     }
 
     const error =(xold, xnew)=> Math.abs((xnew-xold)/xnew)*100;
-   
-    const Calbisection = (xl, xr) => {
-        var x1,fX1,fXr,fXl,ea,scope;
+    const addFx=(add)=>{
+        return evaluate(Equation,{x:add});
+    }
+    const diffFx=(add)=>{
+        return derivative(Equation,'x').evaluate({x:add})
+    }
+    const Calnewton = (x) => {
+        var xold;
         var iter = 0;
         var MAX = 50;
         const e = 0.00001;
         var obj={};
-        do
-        {
-            scope = {x:xr}
-            fXr = evaluate(Equation, scope)
-
-            scope = {x:xl}
-            fXl = evaluate(Equation, scope)
-
-            x1 = (xl*fXr-xr*fXl)/(fXr-fXl);
-
-            scope = {x:x1}
-            fX1 = evaluate(Equation, scope)
-            iter ++;
-            if (fX1*fXr > 0)
-            {
-                ea = error(xr, x1);
-                obj = {iteration:iter,Xl:xl,X:x1,Xr:xr}
-                data.push(obj)
-                xr = x1;
-            }
-            else if (fX1*fXr < 0)
-            {
-                ea = error(xl, x1);
-                obj = {iteration:iter,Xl:xl,X:x1,Xr:xr}
-                data.push(obj)
-                xl = x1;
-            }
-        }while(ea>e && iter<MAX)
-        setans(x1)
+        do{
+            xold = x
+            x = xold - (addFx(xold)/diffFx(xold))
+            console.log(diffFx(xold))
+            iter++
+            obj = {iteration:iter,X:x}
+            data.push(obj)
+        }while(error(xold,x)>e && iter<MAX)
+        setans(x)
     }
 
     const data =[];
     const [html, setHtml] = useState(null);
-    const [Equation,setEquation] = useState("(x^4)-13")
+    const [Equation,setEquation] = useState("(x^2)-7")
     const [ans,setans] = useState(0)
-    const [XL,setXL] = useState(0)
-    const [XR,setXR] = useState(0)
+    const [X0,setX0] = useState(0)
+    
 
     const inputEquation = (event) =>{
         setEquation(event.target.value)
     }
 
-    const inputXL = (event) =>{
-        setXL(event.target.value)
+    const inputX0 = (event) =>{
+        setX0(event.target.value)
     }
 
-    const inputXR = (event) =>{
-        setXR(event.target.value)
-    }
 
     const calculateRoot = () =>{
-        const xlnum = parseFloat(XL)
-        const xrnum = parseFloat(XR)
-        Calbisection(xlnum,xrnum);
+        const x0num = parseFloat(X0)
+        
+        Calnewton(x0num);
      
         setHtml(print());
     }
 
     return (
             <Container>
-                <div className="layout"><h1>False position</h1></div>
+                <div className="layout"><h1>Newton Raphson</h1></div>
                 <div className="alignown">
                     <Form >
                         <Form.Group className="mb-3" as={Row}>
@@ -109,13 +87,10 @@ const FalsePosition =()=>{
                             <input type="text" id="equation" value={Equation} onChange={inputEquation} style={{width:"100%", margin:"0 auto"}} className="form-control"></input>
                         </Form.Group>
                         <Form.Group className="mb-3" as={Row}>    
-                            <Form.Label>Input XL</Form.Label>
-                            <input type="number" id="XL" onChange={inputXL} style={{width:"100%", margin:"0 auto"}} className="form-control"></input>
+                            <Form.Label>Input X0</Form.Label>
+                            <input type="number" id="XL" onChange={inputX0} style={{width:"100%", margin:"0 auto"}} className="form-control"></input>
                         </Form.Group>  
-                        <Form.Group className="mb-3" as={Row}>  
-                            <Form.Label>Input XR</Form.Label>
-                            <input type="number" id="XR" onChange={inputXR} style={{width:"100%", margin:"0 auto"}} className="form-control"></input>
-                        </Form.Group>
+
                         <div className="alignown">
                             <Button variant="dark" onClick={calculateRoot}>
                                 Calculate
@@ -132,4 +107,4 @@ const FalsePosition =()=>{
     )
 }
 
-export default FalsePosition
+export default NewtonRaphson

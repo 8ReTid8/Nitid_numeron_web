@@ -7,6 +7,8 @@ import Entity404 from './entity404';
 import Bisection from './pages/Bisection'
 import FalsePosition from './pages/FalsePosition';
 import Onepoint from './pages/Onepoint';
+import NewtonRaphson from './pages/NewtonRaphson';
+import Secant from './pages/Secant';
 import Graphical from './pages/Graphical';
 
 import Home from './pages/Home';
@@ -24,6 +26,8 @@ function App() {
           <Route path='/Bisection' element={<Bisection/>}></Route>
           <Route path='/FalsePosition' element={<FalsePosition/>}></Route>
           <Route path='/Onepoint' element={<Onepoint/>}></Route>
+          <Route path='/Newton Raphson' element={<NewtonRaphson/>}></Route>
+          <Route path='/Secant' element={<Secant/>}></Route>
           <Route path='*' element={<Entity404/>}></Route>
         </Routes>
       </div>
