@@ -1,7 +1,7 @@
 import { useState } from "react"
 import { Button, Container, Form, Table,Row} from "react-bootstrap";
 import { evaluate } from 'mathjs'
-
+import Plot from 'react-plotly.js';
 const Graphical =()=>{
         
     const calgraphical=(x0)=>{
@@ -13,7 +13,7 @@ const Graphical =()=>{
         y = evaluate(Equation,{x:x0})
         iter++;
         obj = {iteration:iter,X:x0,Y:y}
-        data.push(obj)
+        datatable.push(obj)
         while(y!=0&&iter<MAX){
             x0++;
             let ynew = evaluate(Equation,{x:x0})
@@ -21,7 +21,7 @@ const Graphical =()=>{
                 y = ynew;
                 iter++;
                 obj = {iteration:iter,X:x0,Y:y}
-                data.push(obj)
+                datatable.push(obj)
             }
             if(y*ynew<0){
                 x0 -= 1;
@@ -30,15 +30,15 @@ const Graphical =()=>{
                     y = evaluate(Equation,{x:x0})
                     iter++;
                     obj = {iteration:iter,X:x0,Y:y}
-                    data.push(obj)
+                    datatable.push(obj)
                 }
                 break
             }
         }
         setans(x0)
     }
-
-    const data = []
+    const datatable = []
+    const [pointtable,setpointtable] = useState([])
     const [html, setHtml] = useState(null);
     const [Equation,setEquation] = useState("(43*x)-180")
     const [ans,setans] = useState(0)
@@ -54,10 +54,12 @@ const Graphical =()=>{
         const xnum = parseFloat(X)
         calgraphical(xnum);
         setHtml(print());
+        setpointtable(datatable)
+        // console.log(datatable)
     }
 
     const print = () =>{
-        console.log(data)
+        console.log(datatable)
         return(
             <Container>
                 <Table striped bordered hover variant="dark">
@@ -69,7 +71,7 @@ const Graphical =()=>{
                         </tr>
                     </thead>
                     <tbody align="center">
-                        {data.map((element, index)=>{
+                        {datatable.map((element, index)=>{
                             return  (
                             <tr key={index}>
                                 <td>{element.iteration}</td>
@@ -97,9 +99,23 @@ const Graphical =()=>{
                         <Form.Label>Input X</Form.Label>
                         <input type="number" id="X0" onChange={inputX} style={{width:"100%", margin:"0 auto"}} className="form-control"></input>
                     </Form.Group>
+                    
                     <div className="alignown">
                         <Button variant="dark" onClick={calculateRoot}>Calculate</Button>
                     </div>
+                    
+                    <Plot
+                        data={[
+                            {
+                                x: pointtable.map((point) => (point.X)),
+                                y: pointtable.map((point) => (point.Y)),
+                                mode: 'lines',
+                                marker: {color: 'blue'}
+                            }
+                        ]}
+                        layout={{width : 1000,height : 800}}
+                        config={{ staticPlot: false }}
+                    />
                 </Form>
             </div>
             <br></br>

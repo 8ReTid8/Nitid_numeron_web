@@ -25,16 +25,12 @@ function myNavbar() {
                 <NavDropdown.Item href="Secant">Secant Method</NavDropdown.Item>
               </NavDropdown>
 
-              <NavDropdown title="Dropdown" id="basic-nav-dropdown"  className="setfontsilk">
-                <NavDropdown.Item href="">Action</NavDropdown.Item>
-                <NavDropdown.Item href="">
-                  {/* Another action */}
-                </NavDropdown.Item>
-                <NavDropdown.Item href="">Something</NavDropdown.Item>
-                <NavDropdown.Divider />
-                <NavDropdown.Item href="">
-                  {/* Separated link */}
-                </NavDropdown.Item>
+              <NavDropdown title="Linear Algebra" id="basic-nav-dropdown"  className="setfontsilk">
+                <NavDropdown.Item href="Cramer">Cramer Rule</NavDropdown.Item>
+                <NavDropdown.Item href="GaussElimination">Gauss Elimination</NavDropdown.Item>
+                <NavDropdown.Item href="GaussJordan">Gauss Jordan</NavDropdown.Item>
+                <NavDropdown.Item href="MatrixInversion">Matrix Inversion</NavDropdown.Item>
+                <NavDropdown.Item href="LU">LU Decomposition</NavDropdown.Item>
               </NavDropdown>
 
             </Nav>

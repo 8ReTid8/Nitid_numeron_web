@@ -71,9 +71,7 @@ const NewtonRaphson =()=>{
 
     const calculateRoot = () =>{
         const x0num = parseFloat(X0)
-        
         Calnewton(x0num);
-     
         setHtml(print());
     }
 
