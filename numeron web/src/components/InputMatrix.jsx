@@ -3,20 +3,16 @@ import { Container, Row, Form, Button, Col, FormLabel } from 'react-bootstrap'
 
 export default function InputMatrix() {
   const [size, setSize] = useState(3);
+  const [sizeInput, setSizeInput] = useState(3);
   const [matrix, setMatrix] = useState([])
   const [B, setB] = useState(new Array(size).fill(0))
   const [X, setX] = useState([])
-  // const inputSize = (event) =>{
-  //     setsize(event.target.value)
-  // }
-
+ 
   useEffect(() => {
-    console.log(size)
-    if(!(size==null||size==undefined)){
     const newMatrix = [];
-    // const newB = [];
+   
     for (let i = 0; i < size; i++) {
-      // newB.push(0);
+    
       const row = [];
       for (let j = 0; j < size; j++) {
         row.push(0); // Initialize all cells to 0
@@ -24,17 +20,14 @@ export default function InputMatrix() {
       newMatrix.push(row);
     }
     setMatrix(newMatrix);
-    // setB(newB);
-  }
+    
   }, [size]);
 
-  const inputSize = (event) => {
-    const newSize = parseInt(event.target.value);
-    if(!(newSize==null||newSize==undefined)){
-      setSize(()=>{return newSize});
-      setB(new Array(newSize).fill(0));
-    }
-  };
+  // const inputSize = (event) => {
+  //   const newSize = parseInt(event.target.value);
+  //   setSize(newSize);
+  //   setB(new Array(newSize).fill(0));
+  // };
 
   const handleMatrixChange = (rowIndex, colIndex, event) => {
     const newValue = parseFloat(event.target.value);
@@ -42,13 +35,17 @@ export default function InputMatrix() {
     newMatrix[rowIndex][colIndex] = newValue;
     setMatrix(newMatrix);
   };
-  console.log(size)
+
 
   const handleBChange = (rowIndex, event) => {
     const newValue = parseFloat(event.target.value);
     const newB = [...B];
     newB[rowIndex] = newValue;
     setB(newB);
+  };
+  const handleSizeSubmit = () => {
+    setSize(sizeInput);
+    setB(new Array(sizeInput).fill(0));
   };
 
   return (
@@ -57,7 +54,14 @@ export default function InputMatrix() {
         <Form>
           <Form.Group className="mb-3" as={Row}>
             <Form.Label>Input size</Form.Label>
-            <input type="number" value={size} onChange={inputSize} style={{ width: "100%", margin: "0 auto" }} className="form-control"></input>
+            <input type="number"  value={sizeInput} onChange={(e) => setSizeInput(parseInt(e.target.value))} style={{ width: "100%", margin: "0 auto" }} className="form-control"></input>
+          </Form.Group>
+          <Form.Group className="mb-3" as={Row}>
+            <div className="alignown">
+              <Button variant="dark" onClick={handleSizeSubmit}>
+                  Submit
+              </Button>
+            </div>
           </Form.Group>
           <Form.Group className="mb-3" as={Row}>
             <Col>

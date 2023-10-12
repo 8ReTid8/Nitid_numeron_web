@@ -50,7 +50,7 @@ const Graphical =()=>{
     const inputX = (event) =>{
         setX(event.target.value)
     }
-    const calculateRoot = () =>{
+    const calculateGraph = () =>{
         const xnum = parseFloat(X)
         calgraphical(xnum);
         setHtml(print());
@@ -101,7 +101,7 @@ const Graphical =()=>{
                     </Form.Group>
                     
                     <div className="alignown">
-                        <Button variant="dark" onClick={calculateRoot}>Calculate</Button>
+                        <Button variant="dark" onClick={calculateGraph}>Calculate</Button>
                     </div>
                     
                     <Plot

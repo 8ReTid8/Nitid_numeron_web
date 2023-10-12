@@ -1,7 +1,7 @@
 import { useState } from "react"
 import { Button, Container, Form, Table,Row } from "react-bootstrap";
 import { evaluate } from 'mathjs'
-
+import Plot from 'react-plotly.js';
 const Secant =()=>{
     const print = () =>{
         console.log(data)
@@ -41,6 +41,9 @@ const Secant =()=>{
         var MAX = 50;
         const e = 0.00001;
         var obj={};
+        iter++
+        obj = {iteration:iter,Xnew:x1,Xold:x0}
+        data.push(obj)
         while(error(x0,x1)>e && iter<MAX){
             xtemp = x1;
             x1 = x1 - (addFx(x1)*(x1-x0))/(addFx(x1)-addFx(x0))
@@ -54,6 +57,7 @@ const Secant =()=>{
 
     const data =[];
     const [html, setHtml] = useState(null);
+    const [pointtable,setpointtable] = useState([])
     const [Equation,setEquation] = useState("(x^2)-7")
     const [ans,setans] = useState(0)
     const [X0,setX0] = useState(0)
@@ -75,7 +79,7 @@ const Secant =()=>{
         const x0num = parseFloat(X0)
         const x1num = parseFloat(X1)
         Calsecant(x0num,x1num);
-     
+        setpointtable(data)
         setHtml(print());
     }
 
@@ -101,6 +105,18 @@ const Secant =()=>{
                                 Calculate
                             </Button>
                         </div>
+                        <Plot
+                            data={[
+                                {
+                                    x: pointtable.map((point) => (point.Xold)),
+                                    y: pointtable.map((point) => (point.Xnew)),
+                                    mode: 'lines',
+                                    marker: {color: 'blue'}
+                                }
+                            ]}
+                            layout={{width : 1000,height : 800}}
+                            config={{ staticPlot: false }}
+                        />
                     </Form>
                 </div>
                 <br></br>

@@ -1,7 +1,7 @@
 import { useState } from "react"
 import { Button, Container, Form, Table,Row } from "react-bootstrap";
 import { evaluate,derivative } from 'mathjs'
-
+import Plot from 'react-plotly.js';
 const NewtonRaphson =()=>{
     const print = () =>{
         console.log(data)
@@ -11,7 +11,8 @@ const NewtonRaphson =()=>{
                     <thead align="center">
                         <tr>
                             <th width="10%">Iteration</th>
-                            <th width="45%">X</th>
+                            <th width="45%">Xnew</th>
+                            <th width="45%">Xold</th>
                         </tr>
                     </thead>
                     <tbody align="center">
@@ -19,7 +20,8 @@ const NewtonRaphson =()=>{
                             return  (
                             <tr key={index}>
                                 <td>{element.iteration}</td>
-                                <td>{element.X}</td>
+                                <td>{element.Xnew}</td>
+                                <td>{element.Xold}</td>
                             </tr>)
                         })}
                     </tbody>
@@ -47,13 +49,14 @@ const NewtonRaphson =()=>{
             x = xold - (addFx(xold)/diffFx(xold))
             console.log(diffFx(xold))
             iter++
-            obj = {iteration:iter,X:x}
+            obj = {iteration:iter,Xnew:x,Xold:xold}
             data.push(obj)
         }while(error(xold,x)>e && iter<MAX)
         setans(x)
     }
 
     const data =[];
+    const [pointtable,setpointtable] = useState([])
     const [html, setHtml] = useState(null);
     const [Equation,setEquation] = useState("(x^2)-7")
     const [ans,setans] = useState(0)
@@ -69,10 +72,11 @@ const NewtonRaphson =()=>{
     }
 
 
-    const calculateRoot = () =>{
+    const calculateNewton = () =>{
         const x0num = parseFloat(X0)
         Calnewton(x0num);
         setHtml(print());
+        setpointtable(data)
     }
 
     return (
@@ -90,10 +94,22 @@ const NewtonRaphson =()=>{
                         </Form.Group>  
 
                         <div className="alignown">
-                            <Button variant="dark" onClick={calculateRoot}>
+                            <Button variant="dark" onClick={calculateNewton}>
                                 Calculate
                             </Button>
                         </div>
+                        <Plot
+                        data={[
+                            {
+                                x: pointtable.map((point) => (point.Xold)),
+                                y: pointtable.map((point) => (point.Xnew)),
+                                mode: 'lines',
+                                marker: {color: 'blue'}
+                            }
+                        ]}
+                        layout={{width : 1000,height : 800}}
+                        config={{ staticPlot: false }}
+                     />
                     </Form>
                 </div>
                 <br></br>

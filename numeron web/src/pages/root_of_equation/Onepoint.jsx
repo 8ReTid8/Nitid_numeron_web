@@ -1,7 +1,7 @@
 import { useState } from "react"
 import { Button, Container, Form, Table,Row} from "react-bootstrap";
 import { evaluate } from 'mathjs'
-
+import Plot from 'react-plotly.js';
 const Onepoint =()=>{
     
     const error =(xold, xnew)=> Math.abs((xnew-xold)/xnew)*100;
@@ -23,6 +23,7 @@ const Onepoint =()=>{
     }
 
     const data = []
+    const [pointtable,setpointtable] = useState([])
     const [html, setHtml] = useState(null);
     const [Equation,setEquation] = useState("(x+7)/(x+1)")
     const [ans,setans] = useState(0)
@@ -34,10 +35,11 @@ const Onepoint =()=>{
     const inputX0 = (event) =>{
         setX0(event.target.value)
     }
-    const calculateRoot = () =>{
+    const calculateOnepoint = () =>{
         const xnum = parseFloat(X0)
         calonepoint(xnum);
         setHtml(print());
+        setpointtable(data)
     }
 
     const print = () =>{
@@ -82,8 +84,20 @@ const Onepoint =()=>{
                         <input type="number" id="X0" onChange={inputX0} style={{width:"100%", margin:"0 auto"}} className="form-control"></input>
                     </Form.Group>
                     <div className="alignown">
-                        <Button variant="dark" onClick={calculateRoot}>Calculate</Button>
+                        <Button variant="dark" onClick={calculateOnepoint}>Calculate</Button>
                     </div>
+                    <Plot
+                        data={[
+                            {
+                                x: pointtable.map((point) => (point.X)),
+                                y: pointtable.map((point) => (point.Xold)),
+                                mode: 'lines',
+                                marker: {color: 'blue'}
+                            }
+                        ]}
+                        layout={{width : 1000,height : 800}}
+                        config={{ staticPlot: false }}
+                    />
                 </Form>
             </div>
             <br></br>
