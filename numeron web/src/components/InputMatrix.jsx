@@ -1,13 +1,18 @@
 import { useState, useEffect } from 'react'
 import { Container, Row, Form, Button, Col, FormLabel } from 'react-bootstrap'
 
-export default function InputMatrix() {
+export default function InputMatrix({cal}) {
   const [size, setSize] = useState(3);
   const [sizeInput, setSizeInput] = useState(3);
   const [matrix, setMatrix] = useState([])
   const [B, setB] = useState(new Array(size).fill(0))
   const [X, setX] = useState([])
- 
+
+  const throwinput=()=>{
+    cal(size,matrix,B)
+
+  }
+
   useEffect(() => {
     const newMatrix = [];
    
@@ -106,6 +111,13 @@ export default function InputMatrix() {
                 </Row>
               ))}
             </Col>
+          </Form.Group>
+          <Form.Group className="mb-3" as={Row}>
+            <div className="alignown">
+              <Button variant="dark" onClick={throwinput}>
+                  Calculate
+              </Button>
+            </div>
           </Form.Group>
         </Form>
       </div>
