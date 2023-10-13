@@ -59,7 +59,7 @@ export default function InputMatrix({cal}) {
         <Form>
           <Form.Group className="mb-3" as={Row}>
             <Form.Label>Input size</Form.Label>
-            <input type="number"  value={sizeInput} onChange={(e) => setSizeInput(parseInt(e.target.value))} style={{ width: "100%", margin: "0 auto" }} className="form-control"></input>
+            <input type="number" value={sizeInput} onChange={(e) => setSizeInput(parseInt(e.target.value))} style={{ width: "100%", margin: "0 auto" }} className="form-control"></input>
           </Form.Group>
           <Form.Group className="mb-3" as={Row}>
             <div className="alignown">

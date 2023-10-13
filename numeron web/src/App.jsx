@@ -10,7 +10,7 @@ import Onepoint from './pages/root_of_equation/Onepoint';
 import NewtonRaphson from './pages/root_of_equation/NewtonRaphson';
 import Secant from './pages/root_of_equation/Secant';
 import Graphical from './pages/root_of_equation/Graphical';
-
+import GaussElimination from './pages/linear_algebra/GaussElimination';
 import Home from './pages/Home';
 import CramerRule from './pages/linear_algebra/CramerRule';
 function App() {
@@ -32,6 +32,8 @@ function App() {
           <Route path='*' element={<Entity404/>}></Route>
           {/* linear algebra */}
           <Route path='/Cramer' element={<CramerRule/>}></Route>
+          <Route path='/GaussElimination' element={<GaussElimination/>}></Route>
+
         </Routes>
       </div>
     </div>
