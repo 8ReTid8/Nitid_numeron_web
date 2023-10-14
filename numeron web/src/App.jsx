@@ -13,6 +13,7 @@ import Graphical from './pages/root_of_equation/Graphical';
 import GaussElimination from './pages/linear_algebra/GaussElimination';
 import Home from './pages/Home';
 import CramerRule from './pages/linear_algebra/CramerRule';
+import GaussJordan from './pages/linear_algebra/GaussJordan';
 function App() {
   const [count, setCount] = useState(0)
 
@@ -33,7 +34,9 @@ function App() {
           {/* linear algebra */}
           <Route path='/Cramer' element={<CramerRule/>}></Route>
           <Route path='/GaussElimination' element={<GaussElimination/>}></Route>
-
+          <Route path='/GaussJordan' element={<GaussJordan/>}> </Route>
+          <Route path='/MatrixInversion' element={<GaussJordan/>}> </Route>
+          <Route path='/LU' element={<GaussJordan/>}> </Route>
         </Routes>
       </div>
     </div>

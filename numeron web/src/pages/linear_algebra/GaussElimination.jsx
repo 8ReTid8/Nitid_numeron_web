@@ -7,22 +7,24 @@ export default function GaussElimination() {
     const [X,setX] = useState([])
     const calgauss=(size,mat,B)=>{
         const ans = []
+        let copy = mat.map((Row)=>[...Row])
+        let b = [...B]
         for (let i = 0; i < size; ++i) {
             ans.push(0)
             for (let j = i + 1; j < size; ++j) {
-                let ratio = mat[j][i] / mat[i][i];
+                let ratio = copy[j][i] / copy[i][i];
                 for (let k = 0; k < size; ++k) {
-                    mat[j][k] -= ratio * mat[i][k];
+                    copy[j][k] -= ratio * copy[i][k];
                 }
-                B[j] -= ratio * B[i];
+                b[j] -= ratio * b[i];
             }
         }
 
         for(let i=size-1;i>=0;i--){
             for(let j=i+1;j<size;j++){
-                 B[i] -= mat[i][j]*ans[j];
+                 b[i] -= copy[i][j]*ans[j];
             }
-            ans[i] = B[i]/mat[i][i];
+            ans[i] = b[i]/copy[i][i];
         }
         setX(ans)
     }
