@@ -31,6 +31,15 @@ function myNavbar() {
                 <NavDropdown.Item href="GaussJordan">Gauss Jordan</NavDropdown.Item>
                 <NavDropdown.Item href="MatrixInversion">Matrix Inversion</NavDropdown.Item>
                 <NavDropdown.Item href="LU">LU Decomposition</NavDropdown.Item>
+                <NavDropdown.Item href="Jacobi">Jacobi iteration</NavDropdown.Item>
+                <NavDropdown.Item href="GaussSeidel">Gauss-Seidel iteration</NavDropdown.Item>
+                <NavDropdown.Item href="Conjugate">Conjugate Gradient</NavDropdown.Item>
+              </NavDropdown>
+
+              <NavDropdown title="Interpolation and Extrapolation" id="basic-nav-dropdown"  className="setfontsilk">
+                <NavDropdown.Item href="NewtonDivided">Newton Divided</NavDropdown.Item>
+                <NavDropdown.Item href="Lagrange">Lagrange</NavDropdown.Item>
+                <NavDropdown.Item href="Spline">Spline</NavDropdown.Item>
               </NavDropdown>
 
             </Nav>

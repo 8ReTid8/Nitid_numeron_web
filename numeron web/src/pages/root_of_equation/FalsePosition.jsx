@@ -1,10 +1,10 @@
 import { useState } from "react"
 import { Button, Container, Form, Table,Row } from "react-bootstrap";
 import { evaluate } from 'mathjs'
-
+import Plot from 'react-plotly.js';
 const FalsePosition =()=>{
     const print = () =>{
-        console.log(data)
+        console.log(datatable)
         return(
             <Container>
                 <Table striped bordered hover variant="dark">
@@ -17,7 +17,7 @@ const FalsePosition =()=>{
                         </tr>
                     </thead>
                     <tbody align="center">
-                        {data.map((element, index)=>{
+                        {datatable.map((element, index)=>{
                             return  (
                             <tr key={index}>
                                 <td>{element.iteration}</td>
@@ -57,22 +57,23 @@ const FalsePosition =()=>{
             if (fX1*fXr > 0)
             {
                 ea = error(xr, x1);
-                obj = {iteration:iter,Xl:xl,X:x1,Xr:xr}
-                data.push(obj)
+                obj = {iteration:iter,Xl:xl,X:x1,Xr:xr,FX1:fX1}
+                datatable.push(obj)
                 xr = x1;
             }
             else if (fX1*fXr < 0)
             {
                 ea = error(xl, x1);
-                obj = {iteration:iter,Xl:xl,X:x1,Xr:xr}
-                data.push(obj)
+                obj = {iteration:iter,Xl:xl,X:x1,Xr:xr,FX1:fX1}
+                datatable.push(obj)
                 xl = x1;
             }
         }while(ea>e && iter<MAX)
         setans(x1)
     }
 
-    const data =[];
+    const datatable =[];
+    const [pointtable,setpointtable] = useState([])
     const [html, setHtml] = useState(null);
     const [Equation,setEquation] = useState("(x^4)-13")
     const [ans,setans] = useState(0)
@@ -95,7 +96,7 @@ const FalsePosition =()=>{
         const xlnum = parseFloat(XL)
         const xrnum = parseFloat(XR)
         Calbisection(xlnum,xrnum);
-     
+        setpointtable(datatable)
         setHtml(print());
     }
 
@@ -121,6 +122,18 @@ const FalsePosition =()=>{
                                 Calculate
                             </Button>
                         </div>
+                        <Plot
+                            data={[
+                                {
+                                    x: pointtable.map((point) => (point.X)),
+                                    y: pointtable.map((point) => (point.FX1)),
+                                    mode: 'lines',
+                                    marker: {color: 'blue'}
+                                }
+                            ]}
+                            layout={{width : 1000,height : 800}}
+                            config={{ staticPlot: false }}
+                        />
                     </Form>
                 </div>
                 <br></br>

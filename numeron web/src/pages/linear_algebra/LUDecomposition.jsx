@@ -5,11 +5,32 @@ import { det, matrix } from 'mathjs'
 
 
 export default function LUDecomposition() {
-
+    const [X,setX] = useState([])
     const calLU=(size,mat,B)=>{
         const ans = []
         let copy = mat.map((Row)=>[...Row])
         let b = [...B]
+        let Low = []
+        let Up = []
+        let y = [];
+        for(let i=0;i<size;i++){
+            ans.push(0)
+            y.push(0)
+            const LowR = []
+            const UpR = []
+            for(let j=0;j<size;j++){
+                if(i==j){
+                    UpR.push(1)
+                }
+                else{
+                    UpR.push(0)
+                }
+                LowR.push(0)
+            }
+            Low.push(LowR)
+            Up.push(UpR)
+        }
+
         for (let i = 0; i < size; i++){
             let index = 0;
             for (let j = 0; j < i+1; j++){
@@ -35,17 +56,17 @@ export default function LUDecomposition() {
             for(let j=0;j<size;j++){
                 sum += Low[i][j]*y[j];
             }
-            y[i] = (B[i]-sum)/Low[i][i];
+            y[i] = (b[i]-sum)/Low[i][i];
         }
         // find UX=Y
         for(let i=size-1;i>=0;i--){
             let sum = 0;
             for(let j=0;j<size;j++){
-                sum += Up[i][j]*x[j];
+                sum += Up[i][j]*ans[j];
             }
-            x[i] = y[i]-sum;
-            System.out.println(Math.ceil(x[i]));
+            ans[i] = y[i]-sum;
         }
+        setX(ans)
     }
 
 

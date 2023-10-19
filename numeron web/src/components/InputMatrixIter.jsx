@@ -6,11 +6,10 @@ export default function InputMatrix({cal}) {
   const [sizeInput, setSizeInput] = useState(3);
   const [matrix, setMatrix] = useState([])
   const [B, setB] = useState(new Array(size).fill(0))
-  const [X, setX] = useState([])
+  const [X, setX] = useState(new Array(size).fill(0))
 
   const throwinput=()=>{
-    cal(size,matrix,B)
-
+    cal(size,matrix,B,X)
   }
 
   useEffect(() => {
@@ -40,6 +39,13 @@ export default function InputMatrix({cal}) {
     setMatrix(newMatrix);
   };
 
+  const handleXChange = (rowIndex, event) => {
+    const newValue = parseFloat(event.target.value);
+    const newX = [...X];
+    newX[rowIndex] = newValue;
+    setX(newX);
+  };
+  console.log(X)
 
   const handleBChange = (rowIndex, event) => {
     const newValue = parseFloat(event.target.value);
@@ -50,6 +56,7 @@ export default function InputMatrix({cal}) {
   const handleSizeSubmit = () => {
     setSize(sizeInput);
     setB(new Array(sizeInput).fill(0));
+    setX(new Array(sizeInput).fill(0));
   };
 
   return (
@@ -88,11 +95,12 @@ export default function InputMatrix({cal}) {
            
             <Col>
               <Form.Label>X</Form.Label>
-              {B.map((cell, rowIndex) => (
+              {X.map((cell, rowIndex) => (
                 <Row key={rowIndex}>
                   <Form.Control
-                    value= {`X${rowIndex}`}
-                    disabled
+                    type="number"
+                    value={cell}
+                    onChange={(e) => handleXChange(rowIndex, e)}
                   />
                 </Row>
               ))}

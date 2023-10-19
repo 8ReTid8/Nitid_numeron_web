@@ -1,14 +1,14 @@
 import { useState } from "react"
 import { Button, Container, Form, Table,Row } from "react-bootstrap";
 import { evaluate } from 'mathjs'
-
+import Plot from 'react-plotly.js';
 const Bisection =()=>{
     const print = () =>{
-        console.log(data)
-        setValueIter(data.map((x)=>x.iteration));
-        setValueXl(data.map((x)=>x.Xl));
-        setValueXm(data.map((x)=>x.Xm));
-        setValueXr(data.map((x)=>x.Xr));
+        console.log(datatable)
+        setValueIter(datatable.map((x)=>x.iteration));
+        setValueXl(datatable.map((x)=>x.Xl));
+        setValueXm(datatable.map((x)=>x.Xm));
+        setValueXr(datatable.map((x)=>x.Xr));
         return(
             <Container>
                 <Table striped bordered hover variant="dark">
@@ -21,7 +21,7 @@ const Bisection =()=>{
                         </tr>
                     </thead>
                     <tbody align="center">
-                        {data.map((element, index)=>{
+                        {datatable.map((element, index)=>{
                             return  (
                             <tr key={index}>
                                 <td>{element.iteration}</td>
@@ -66,9 +66,10 @@ const Bisection =()=>{
                     iteration:iter,
                     Xl:xl,
                     Xm:xm,
-                    Xr:xr
+                    Xr:xr,
+                    FXm:fXm
                 }
-                data.push(obj)
+                datatable.push(obj)
                 xr = xm;
             }
             else if (fXm*fXr < 0)
@@ -78,16 +79,18 @@ const Bisection =()=>{
                     iteration:iter,
                     Xl:xl,
                     Xm:xm,
-                    Xr:xr
+                    Xr:xr,
+                    FXm:fXm
                 }
-                data.push(obj)
+                datatable.push(obj)
                 xl = xm;
             }
         }while(ea>e && iter<MAX)
         setX(xm)
     }
 
-    const data =[];
+    const datatable =[];
+    const [pointtable,setpointtable] = useState([])
     const [valueIter, setValueIter] = useState([]);
     const [valueXl, setValueXl] = useState([]);
     const [valueXm, setValueXm] = useState([]);
@@ -119,12 +122,14 @@ const Bisection =()=>{
         const xlnum = parseFloat(XL)
         const xrnum = parseFloat(XR)
         Calbisection(xlnum,xrnum);
-     
+        setpointtable(datatable)
         setHtml(print());
            
         // console.log(valueIter)
         // console.log(valueXl)
     }
+
+
     return (
         <Container>
             <div className="layout"><h1>Bisection</h1></div>
@@ -147,6 +152,19 @@ const Bisection =()=>{
                             Calculate
                         </Button>
                     </div>
+                    <Plot
+                        data={[
+                            {
+                                x: pointtable.map((point) => (point.Xm)),
+                                y: pointtable.map((point) => (point.FXm)),
+                                mode: 'lines',
+                                marker: {color: 'blue'}
+                            }
+                        ]}
+                        layout={{width : 1000,height : 800}}
+                        config={{ staticPlot: false }}
+                    />
+                    
                 </Form>
             </div>
             <br></br>
