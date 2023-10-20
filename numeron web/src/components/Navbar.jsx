@@ -42,6 +42,10 @@ function myNavbar() {
                 <NavDropdown.Item href="Spline">Spline</NavDropdown.Item>
               </NavDropdown>
 
+              <NavDropdown title="Regression" id="basic-nav-dropdown"  className="setfontsilk">
+                <NavDropdown.Item href="LinearRegression">Linear Regression</NavDropdown.Item>
+                <NavDropdown.Item href="Lagrange">Lagrange</NavDropdown.Item>
+              </NavDropdown>
             </Nav>
           </Navbar.Collapse>
         </Container>

@@ -19,6 +19,9 @@ import MatrixInversion from './pages/linear_algebra/MatrixInversion';
 import JacobiIteration from './pages/linear_algebra/JacobiIteration';
 import GaussSeidel from './pages/linear_algebra/GaussSeidel';
 import Conjugate from './pages/linear_algebra/Conjugate';
+import NewtonDivided from './pages/inter_and extra/NewtonDivided';
+import Lagrange from './pages/inter_and extra/Lagrange';
+import LinearRegression from './pages/regression/LinearRegression';
 function App() {
   const [count, setCount] = useState(0)
 
@@ -45,8 +48,12 @@ function App() {
           <Route path='/Jacobi' element={<JacobiIteration/>}> </Route>
           <Route path='/GaussSeidel' element={<GaussSeidel/>}> </Route>
           <Route path='/Conjugate' element={<Conjugate/>}> </Route>
+          {/* inter and extra */}
+          <Route path='/NewtonDivided' element={<NewtonDivided/>}> </Route>
+          <Route path='/Lagrange' element={<Lagrange/>}> </Route>
+          {/* regression */}
+          <Route path='/LinearRegression' element={<LinearRegression/>}> </Route>
 
-                  
         </Routes>
       </div>
     </div>
