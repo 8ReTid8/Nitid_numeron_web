@@ -46,6 +46,11 @@ function myNavbar() {
                 <NavDropdown.Item href="LinearRegression">Linear Regression</NavDropdown.Item>
                 <NavDropdown.Item href="Lagrange">Lagrange</NavDropdown.Item>
               </NavDropdown>
+
+              <NavDropdown title="Interpolation and Differentiation" id="basic-nav-dropdown"  className="setfontsilk">
+                <NavDropdown.Item href="CompositeTrapzoidal">Composite Trapzoidal</NavDropdown.Item>
+                <NavDropdown.Item href="CompositeSimpson">Composite Simpson</NavDropdown.Item>
+              </NavDropdown>
             </Nav>
           </Navbar.Collapse>
         </Container>

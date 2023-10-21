@@ -19,9 +19,11 @@ import MatrixInversion from './pages/linear_algebra/MatrixInversion';
 import JacobiIteration from './pages/linear_algebra/JacobiIteration';
 import GaussSeidel from './pages/linear_algebra/GaussSeidel';
 import Conjugate from './pages/linear_algebra/Conjugate';
-import NewtonDivided from './pages/inter_and extra/NewtonDivided';
-import Lagrange from './pages/inter_and extra/Lagrange';
+import NewtonDivided from './pages/inter_and_extra/NewtonDivided';
+import Lagrange from './pages/inter_and_extra/Lagrange';
 import LinearRegression from './pages/regression/LinearRegression';
+import CompositeTrapzoidal from './pages/inter_and_diff/CompositeTrapzoidal';
+import CompositeSimpson from './pages/inter_and_diff/CompositeSimpson';
 function App() {
   const [count, setCount] = useState(0)
 
@@ -53,7 +55,9 @@ function App() {
           <Route path='/Lagrange' element={<Lagrange/>}> </Route>
           {/* regression */}
           <Route path='/LinearRegression' element={<LinearRegression/>}> </Route>
-
+          {/* inter and diff */}
+          <Route path='/CompositeTrapzoidal' element={<CompositeTrapzoidal/>}></Route>
+          <Route path='/CompositeSimpson' element={<CompositeSimpson/>}></Route>
         </Routes>
       </div>
     </div>
