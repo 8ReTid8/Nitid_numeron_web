@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { Container, Row, Form, Button, Col } from 'react-bootstrap'
 
-export default function InputX_Fx({ cal }) {
+export default function InputReg({ cal }) {
     const [size, setsize] = useState(5)
     const [X, setX] = useState(new Array(size).fill(0))
     const [Fx, setFx] = useState(new Array(size).fill(0))

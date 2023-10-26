@@ -92,7 +92,7 @@ export default function LinearRegression() {
 
     return (
         <Container>
-            <div className='layout'><h1>Linear Regression</h1></div>
+            <div className='layout'><h1>Polynomial Regression</h1></div>
             <InputReg cal={calreg}></InputReg>
             <h5>Answer : {ans}</h5>
         </Container>

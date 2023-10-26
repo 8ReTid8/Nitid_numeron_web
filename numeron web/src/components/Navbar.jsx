@@ -40,13 +40,15 @@ function myNavbar() {
                 <NavDropdown.Item href="NewtonDivided">Newton Divided</NavDropdown.Item>
                 <NavDropdown.Item href="Lagrange">Lagrange</NavDropdown.Item>
                 <NavDropdown.Item href="LinearSpline">Linear Spline</NavDropdown.Item>
-                <NavDropdown.Item href="LinearRegression">Linear Regression</NavDropdown.Item>
+                <NavDropdown.Item href="PolyRegression">Polynomial Regression</NavDropdown.Item>
                 <NavDropdown.Item href="MultipleLinearRegression">Multiple Linear Regression</NavDropdown.Item>
               </NavDropdown>
 
               <NavDropdown title="Integration and Differentiation" id="basic-nav-dropdown"  className="setfontsilk">
                 <NavDropdown.Item href="CompositeTrapzoidal">Composite Trapzoidal</NavDropdown.Item>
                 <NavDropdown.Item href="CompositeSimpson">Composite Simpson</NavDropdown.Item>
+                <NavDropdown.Item href="DivideDifferencesOh">Divide Differences O(h)</NavDropdown.Item>
+                <NavDropdown.Item href="DivideDifferencesOh2">Divide Differences O(h^2)</NavDropdown.Item>
               </NavDropdown>
             </Nav>
           </Navbar.Collapse>

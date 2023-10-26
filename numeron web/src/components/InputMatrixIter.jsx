@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { Container, Row, Form, Button, Col, FormLabel } from 'react-bootstrap'
 
-export default function InputMatrix({cal}) {
+export default function InputMatrixIter({cal}) {
   const [size, setSize] = useState(3);
   const [sizeInput, setSizeInput] = useState(3);
   const [matrix, setMatrix] = useState([])

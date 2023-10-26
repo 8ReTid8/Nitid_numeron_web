@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { Container, Row, Form, Button, Col } from 'react-bootstrap'
 
-export default function InputX_Fx({ cal }) {
+export default function InputComposite({ cal }) {
     const [N, setN] = useState()
     const [A, setA] = useState()
     const [B, setB] = useState()

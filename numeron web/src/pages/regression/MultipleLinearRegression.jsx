@@ -11,8 +11,8 @@ export default function MultipleLinearRegression() {
     let mat
     let x
     let fx
-    const calregmul=(sizedata,matrix,Fx,Xfind,M)=>{
-        m = M+1
+    const calregmul=(sizedata,matrix,Fx,Xfind,size)=>{
+        m = size+1
         n = sizedata
         sumxy = new Array(m).fill(0)
         sumx = []
@@ -39,7 +39,7 @@ export default function MultipleLinearRegression() {
                 sum += a[i]
             }
             else{
-                sum += a[i]*Xfind;
+                sum += a[i]*Xfind[i-1];
             }    
         }
         setans(sum)
@@ -77,7 +77,6 @@ export default function MultipleLinearRegression() {
                 }   
             }
         }
-        console.log(mat)
 
         for(let i=0;i<m;i++){
             const addmat = []

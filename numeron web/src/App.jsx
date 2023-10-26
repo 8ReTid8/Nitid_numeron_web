@@ -26,6 +26,8 @@ import CompositeTrapzoidal from './pages/inter_and_diff/CompositeTrapzoidal';
 import CompositeSimpson from './pages/inter_and_diff/CompositeSimpson';
 import MultipleLinearRegression from './pages/regression/MultipleLinearRegression';
 import SplineLinear from './pages/inter_and_extra/SplineLinear';
+import DD_oh from './pages/inter_and_diff/DD_oh';
+import DD_oh2 from './pages/inter_and_diff/DD_oh2';
 function App() {
   const [count, setCount] = useState(0)
 
@@ -56,12 +58,14 @@ function App() {
           <Route path='/NewtonDivided' element={<NewtonDivided/>}> </Route>
           <Route path='/Lagrange' element={<Lagrange/>}> </Route>
           <Route path='/LinearSpline' element={<SplineLinear/>}> </Route>
-          
-          <Route path='/LinearRegression' element={<LinearRegression/>}> </Route>
+    
+          <Route path='/PolyRegression' element={<LinearRegression/>}> </Route>
           <Route path='/MultipleLinearRegression' element={<MultipleLinearRegression/>}> </Route>
           {/* inter and diff */}
           <Route path='/CompositeTrapzoidal' element={<CompositeTrapzoidal/>}></Route>
           <Route path='/CompositeSimpson' element={<CompositeSimpson/>}></Route>
+          <Route path='/DivideDifferencesOh' element={<DD_oh/>}></Route>
+          <Route path='/DivideDifferencesOh2' element={<DD_oh2/>}></Route>
         </Routes>
       </div>
     </div>

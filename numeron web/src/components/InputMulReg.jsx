@@ -1,26 +1,23 @@
 import { useState, useEffect } from 'react'
 import { Container, Row, Form, Button, Col, FormLabel } from 'react-bootstrap'
 
-export default function InputMatrix({ cal }) {
+export default function InputMulReg({ cal }) {
   const [size, setSize] = useState(3);
   const [sizedata, setsizedata] = useState(4);
   const [sizedataInput, setsizedataInput] = useState(4)
   const [sizeInput, setSizeInput] = useState(3);
   const [matrix, setMatrix] = useState([])
   const [Fx, setFx] = useState(new Array(sizedata).fill(0))
-  const [X, setX] = useState([])
-  const [M, setm] = useState();
-  const [Xfind, setxfind] = useState();
+  const [Xfind, setXfind] = useState(new Array(size).fill(0));
 
 
   const throwinput = () => {
-    cal(sizedata, matrix, Fx, Xfind, M)
+    cal(sizedata, matrix, Fx, Xfind, size)
 
   }
 
   useEffect(() => {
     const newMatrix = [];
-
     for (let i = 0; i < size; i++) {
       const row = [];
       for (let j = 0; j < sizedata; j++) {
@@ -29,10 +26,9 @@ export default function InputMatrix({ cal }) {
       newMatrix.push(row);
     }
     setMatrix(newMatrix);
-
   }, [size, sizedata]);
 
-  console.log(matrix)
+  console.log(Xfind)
 
   const handleMatrixChange = (rowIndex, colIndex, event) => {
     const newValue = parseFloat(event.target.value);
@@ -40,8 +36,12 @@ export default function InputMatrix({ cal }) {
     newMatrix[rowIndex][colIndex] = newValue;
     setMatrix(newMatrix);
   };
-
-
+  const handleXfindChange = (rowIndex, event) => {
+    const newValue = parseFloat(event.target.value);
+    const newXfind = [...Xfind];
+    newXfind[rowIndex] = newValue;
+    setXfind(newXfind);
+  };
   const handleFxChange = (rowIndex, event) => {
     const newValue = parseFloat(event.target.value);
     const newFx = [...Fx];
@@ -52,6 +52,7 @@ export default function InputMatrix({ cal }) {
     setSize(sizeInput);
     setsizedata(sizedataInput)
     setFx(new Array(sizedataInput).fill(0));
+    setXfind(new Array(sizeInput).fill(0));
   };
 
   return (
@@ -73,14 +74,11 @@ export default function InputMatrix({ cal }) {
           </Form.Group>
           <Form.Group className="mb-3" as={Row}>
             <Col>
-              {/* <Form.Label>MATRIX</Form.Label> */}
-
               <Row>
                 {matrix.map((row, rowIndex) => (
                   <Col key={rowIndex}>
-                    <div  className="text-center" disabled>{"x" + rowIndex}</div>
+                    <div className="text-center" disabled>{"x" + rowIndex}</div>
                     {row.map((cell, colIndex) => (
-                      // <div>gay</div>
                       <Form.Control
                         key={colIndex}
                         type="number"
@@ -92,13 +90,10 @@ export default function InputMatrix({ cal }) {
                   </Col>
                 ))}
               </Row>
-
             </Col>
 
-
             <Col>
-              {/* <Form.Label>Fx</Form.Label> */}
-              <div  className="text-center" disabled>F(x)</div>
+              <div className="text-center" disabled>F(x)</div>
               {Fx.map((cell, rowIndex) => (
                 <Row key={rowIndex}>
                   <Form.Control
@@ -111,12 +106,18 @@ export default function InputMatrix({ cal }) {
             </Col>
           </Form.Group>
           <Form.Group className="mb-3" as={Row}>
-            <Form.Label>Input M</Form.Label>
-            <input type="number" value={M} onChange={(e) => setm(parseFloat(e.target.value))} style={{ width: "100%", margin: "0 auto" }} className="form-control"></input>
-          </Form.Group>
-          <Form.Group className="mb-3" as={Row}>
-            <Form.Label>Input X to find</Form.Label>
-            <input type="number" value={Xfind} onChange={(e) => setxfind(parseFloat(e.target.value))} style={{ width: "100%", margin: "0 auto" }} className="form-control"></input>
+            <Form.Label>Input X to find :</Form.Label>
+            {Xfind.map((cell, rowIndex) => (
+              <Col key={rowIndex} style={{ width: "10%", margin: "0 auto" }}>
+                <div className="text-center" disabled>{"x" + rowIndex}</div>
+                <Form.Control
+                  type="number"
+                  value={cell}
+                  onChange={(e) => handleXfindChange(rowIndex, e)}
+                />
+              </Col>
+            ))}
+
           </Form.Group>
           <Form.Group className="mb-3" as={Row}>
             <div className="alignown">
