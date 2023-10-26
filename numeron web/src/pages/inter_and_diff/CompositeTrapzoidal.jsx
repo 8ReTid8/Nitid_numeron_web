@@ -10,15 +10,14 @@ export default function CompositeTrapzoidal() {
         let x0 = A
         let xn = B 
         let sum = evaluate(Equation,{x:x0}) + evaluate(Equation,{x:xn})
-        while(x0<xn){
-            x0 += h
+        let i=1
+        while(i<N){
+            let xcal = x0 + h*i
             console.log(x0)
-            if(x0==xn){
-                break
-            }
-            sum += 2*evaluate(Equation,{x:x0})
+            sum += 2*evaluate(Equation,{x:xcal})
+            i++
         }
-        sum*= h/2
+        sum *= h/2
         setans(sum)
     }
     return (

@@ -39,15 +39,12 @@ function myNavbar() {
               <NavDropdown title="Interpolation and Extrapolation" id="basic-nav-dropdown"  className="setfontsilk">
                 <NavDropdown.Item href="NewtonDivided">Newton Divided</NavDropdown.Item>
                 <NavDropdown.Item href="Lagrange">Lagrange</NavDropdown.Item>
-                <NavDropdown.Item href="Spline">Spline</NavDropdown.Item>
-              </NavDropdown>
-
-              <NavDropdown title="Regression" id="basic-nav-dropdown"  className="setfontsilk">
+                <NavDropdown.Item href="LinearSpline">Linear Spline</NavDropdown.Item>
                 <NavDropdown.Item href="LinearRegression">Linear Regression</NavDropdown.Item>
-                <NavDropdown.Item href="Lagrange">Lagrange</NavDropdown.Item>
+                <NavDropdown.Item href="MultipleLinearRegression">Multiple Linear Regression</NavDropdown.Item>
               </NavDropdown>
 
-              <NavDropdown title="Interpolation and Differentiation" id="basic-nav-dropdown"  className="setfontsilk">
+              <NavDropdown title="Integration and Differentiation" id="basic-nav-dropdown"  className="setfontsilk">
                 <NavDropdown.Item href="CompositeTrapzoidal">Composite Trapzoidal</NavDropdown.Item>
                 <NavDropdown.Item href="CompositeSimpson">Composite Simpson</NavDropdown.Item>
               </NavDropdown>

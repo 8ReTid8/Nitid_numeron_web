@@ -11,20 +11,17 @@ export default function CompositeSimpson() {
         let xn = B
         let sum = evaluate(Equation, { x: x0 }) + evaluate(Equation, { x: xn })
         let i = 1
-        while (x0 < xn) {
-            x0 += h
+        while (i < 2 * N) {
+            let xcal = x0 + h * i
             console.log(x0)
-            if (x0 == xn) {
-                break
+
+            if (i % 2 == 0) {
+                sum += 2 * evaluate(Equation, { x: xcal })
             }
             else {
-                if (i % 2 == 0) {
-                    sum += 2 * evaluate(Equation, { x: x0 })
-                }
-                else {
-                    sum += 4 * evaluate(Equation, { x: x0 })
-                }
+                sum += 4 * evaluate(Equation, { x: xcal })
             }
+
             i++
         }
         sum *= h / 3

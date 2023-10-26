@@ -24,6 +24,8 @@ import Lagrange from './pages/inter_and_extra/Lagrange';
 import LinearRegression from './pages/regression/LinearRegression';
 import CompositeTrapzoidal from './pages/inter_and_diff/CompositeTrapzoidal';
 import CompositeSimpson from './pages/inter_and_diff/CompositeSimpson';
+import MultipleLinearRegression from './pages/regression/MultipleLinearRegression';
+import SplineLinear from './pages/inter_and_extra/SplineLinear';
 function App() {
   const [count, setCount] = useState(0)
 
@@ -53,8 +55,10 @@ function App() {
           {/* inter and extra */}
           <Route path='/NewtonDivided' element={<NewtonDivided/>}> </Route>
           <Route path='/Lagrange' element={<Lagrange/>}> </Route>
-          {/* regression */}
+          <Route path='/LinearSpline' element={<SplineLinear/>}> </Route>
+          
           <Route path='/LinearRegression' element={<LinearRegression/>}> </Route>
+          <Route path='/MultipleLinearRegression' element={<MultipleLinearRegression/>}> </Route>
           {/* inter and diff */}
           <Route path='/CompositeTrapzoidal' element={<CompositeTrapzoidal/>}></Route>
           <Route path='/CompositeSimpson' element={<CompositeSimpson/>}></Route>
