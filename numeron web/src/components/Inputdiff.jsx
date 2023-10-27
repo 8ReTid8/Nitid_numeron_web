@@ -38,7 +38,6 @@ export default function Inputdiff({ cal }) {
                     </Form.Group>
                     <Form.Group className="mb-3" as={Row}>
                         <Form.Label>Input Divide Differences</Form.Label>
-                        {/* <input type="number" value={Diff} onChange={(e) => setDiff(parseFloat(e.target.value))} style={{ width: "100%", margin: "0 auto" }} className="form-control"></input> */}
                         <select onChange={(e) => setDiff(parseFloat(e.target.value))} style={{ width: "100%", margin: "0 auto" }} className="form-control">
                             <option value="1">1</option>
                             <option value="2">2</option>

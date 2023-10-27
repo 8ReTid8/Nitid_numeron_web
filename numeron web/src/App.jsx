@@ -25,7 +25,7 @@ import LinearRegression from './pages/regression/LinearRegression';
 import CompositeTrapzoidal from './pages/inter_and_diff/CompositeTrapzoidal';
 import CompositeSimpson from './pages/inter_and_diff/CompositeSimpson';
 import MultipleLinearRegression from './pages/regression/MultipleLinearRegression';
-import SplineLinear from './pages/inter_and_extra/SplineLinear';
+import Spline from './pages/inter_and_extra/Spline';
 import DD_oh from './pages/inter_and_diff/DD_oh';
 import DD_oh2 from './pages/inter_and_diff/DD_oh2';
 function App() {
@@ -57,7 +57,7 @@ function App() {
           {/* inter and extra */}
           <Route path='/NewtonDivided' element={<NewtonDivided/>}> </Route>
           <Route path='/Lagrange' element={<Lagrange/>}> </Route>
-          <Route path='/LinearSpline' element={<SplineLinear/>}> </Route>
+          <Route path='/Spline' element={<Spline/>}> </Route>
     
           <Route path='/PolyRegression' element={<LinearRegression/>}> </Route>
           <Route path='/MultipleLinearRegression' element={<MultipleLinearRegression/>}> </Route>

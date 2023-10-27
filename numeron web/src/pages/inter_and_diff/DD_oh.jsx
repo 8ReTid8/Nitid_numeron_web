@@ -6,69 +6,73 @@ export default function DD_oh() {
     const [ans, setans] = useState()
 
     const caloh = (Diff, X, H, Equation, Met) => {
+        const f = (X) => {
+            return evaluate(Equation, { x: X });
+        }
+
         if (Met == 0) {
             if (Diff == 1) {
                 setans(
-                    (evaluate(Equation, { x: X + H }) - evaluate(Equation, { x: X })) / H
+                    (f(X + H) - f(X)) / H
                 )
             }
             if (Diff == 2) {
                 setans(
-                    (evaluate(Equation, { x: X + 2 * H }) - 2 * evaluate(Equation, { x: X + H }) + evaluate(Equation, { x: X })) / (Math.pow(H, 2))
+                    (f(X + 2 * H) - 2 * f(X + H) + f(X)) / (Math.pow(H, 2))
                 )
             }
             if (Diff == 3) {
                 setans(
-                    (evaluate(Equation, { x: X + 3 * H }) - 3 * evaluate(Equation, { x: X + 2 * H }) + 3 * evaluate(Equation, { x: X + H }) - evaluate(Equation, { x: X })) / (Math.pow(H, 3))
+                    (f(X + 3 * H) - 3 * f(X + 2 * H) + 3 * f(X + H) - f(X)) / (Math.pow(H, 3))
                 )
             }
             if (Diff == 4) {
                 setans(
-                    (evaluate(Equation, { x: X + 4 * H }) - 4 * evaluate(Equation, { x: X + 3 * H }) + 6 * evaluate(Equation, { x: X + 2 * H }) - 4 * evaluate(Equation, { x: X + H }) + evaluate(Equation, { x: X })) / (Math.pow(H, 4))
+                    (f(X + 4 * H) - 4 * f(X + 3 * H) + 6 * f(X + 2 * H) - 4 * f(X + H) + f(X)) / (Math.pow(H, 4))
                 )
             }
         }
         if (Met == 2) {
             if (Diff == 1) {
                 setans(
-                    (evaluate(Equation, { x: X }) - evaluate(Equation, { x: X - H })) / H
+                    (f(X) - f(X - H)) / H
                 )
             }
             if (Diff == 2) {
                 setans(
-                    (evaluate(Equation, { x: X }) - 2 * evaluate(Equation, { x: X - H }) + evaluate(Equation, { x: X - 2 * H })) / (Math.pow(H, 2))
+                    (f(X) - 2 * f(X - H) + f(X - 2 * H)) / (Math.pow(H, 2))
                 )
             }
             if (Diff == 3) {
                 setans(
-                    (evaluate(Equation, { x: X }) - 3 * evaluate(Equation, { x: X - H }) + 3 * evaluate(Equation, { x: X - 2 * H }) - evaluate(Equation, { x: X - 3 * H })) / (Math.pow(H, 3))
+                    (f(X) - 3 * f(X - H) + 3 * f(X - 2 * H) - f(X - 3 * H)) / (Math.pow(H, 3))
                 )
             }
             if (Diff == 4) {
                 setans(
-                    (evaluate(Equation, { x: X }) - 4 * evaluate(Equation, { x: X - H }) + 6 * evaluate(Equation, { x: X - 2 * H }) - 4 * evaluate(Equation, { x: X - 3 * H }) + evaluate(Equation, { x: X - 4 * H })) / (Math.pow(H, 4))
+                    (f(X) - 4 * f(X - H) + 6 * f(X - 2 * H) - 4 * f(X - 3 * H) + f(X - 4 * H)) / (Math.pow(H, 4))
                 )
             }
         }
         if (Met == 1) {
             if (Diff == 1) {
                 setans(
-                    (evaluate(Equation, { x: X + H }) - evaluate(Equation, { x: X - H })) / (2 * H)
+                    (f(X + H) - f(X - H)) / (2 * H)
                 )
             }
             if (Diff == 2) {
                 setans(
-                    (evaluate(Equation, { x: X + H }) - 2 * evaluate(Equation, { x: X }) + evaluate(Equation, { x: X - H })) / H
+                    (f(X + H) - 2 * f(X) + f(X - H)) / H
                 )
             }
             if (Diff == 3) {
                 setans(
-                    (evaluate(Equation, { x: X + 2 * H }) - 2 * evaluate(Equation, { x: X + H }) + 2 * evaluate(Equation, { x: X - H }) - evaluate(Equation, { x: X - 2 * H })) / (Math.pow(H, 3))
+                    (f(X + 2 * H) - 2 * f(X + H) + 2 * f(X - H) - f(X - 2 * H)) / (Math.pow(H, 3))
                 )
             }
             if (Diff == 4) {
                 setans(
-                    (evaluate(Equation, { x: X + 2 * H }) - 4 * evaluate(Equation, { x: X + H }) + 6 * evaluate(Equation, { x: X }) - 4 * evaluate(Equation, { x: X - H }) + evaluate(Equation, { x: X - 2 * H })) / (Math.pow(H, 4))
+                    (f(X + 2 * H) - 4 * f(X + H) + 6 * f(X) - 4 * f(X - H) + f(X - 2 * H)) / (Math.pow(H, 4))
                 )
             }
         }

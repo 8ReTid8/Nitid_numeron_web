@@ -39,7 +39,7 @@ function myNavbar() {
               <NavDropdown title="Interpolation and Extrapolation" id="basic-nav-dropdown"  className="setfontsilk">
                 <NavDropdown.Item href="NewtonDivided">Newton Divided</NavDropdown.Item>
                 <NavDropdown.Item href="Lagrange">Lagrange</NavDropdown.Item>
-                <NavDropdown.Item href="LinearSpline">Linear Spline</NavDropdown.Item>
+                <NavDropdown.Item href="Spline">Spline</NavDropdown.Item>
                 <NavDropdown.Item href="PolyRegression">Polynomial Regression</NavDropdown.Item>
                 <NavDropdown.Item href="MultipleLinearRegression">Multiple Linear Regression</NavDropdown.Item>
               </NavDropdown>
