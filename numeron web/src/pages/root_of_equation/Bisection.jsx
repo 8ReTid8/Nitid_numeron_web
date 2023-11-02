@@ -1,7 +1,8 @@
 import { useState } from "react"
 import { Button, Container, Form, Table,Row } from "react-bootstrap";
 import { evaluate } from 'mathjs'
-import Plot from 'react-plotly.js';
+import Plot from 'react-plotly.js'
+import axios from 'axios'
 const Bisection =()=>{
     const print = () =>{
         console.log(datatable)
@@ -95,8 +96,14 @@ const Bisection =()=>{
     const [valueXl, setValueXl] = useState([]);
     const [valueXm, setValueXm] = useState([]);
     const [valueXr, setValueXr] = useState([]);
-     
-   
+    
+    const [test , settest] = useState();
+    const datacall=async()=>{
+        axios.get("http://localhost:1987/Bisection").then((res)=>settest(res.data))
+    }
+
+    console.log(test[0].fx)
+
     const [html, setHtml] = useState(null);
     const [Equation,setEquation] = useState("(x^4)-13")
     const [X,setX] = useState(0)
@@ -150,6 +157,9 @@ const Bisection =()=>{
                     <div className="alignown">
                         <Button variant="dark" onClick={calculateRoot}>
                             Calculate
+                        </Button>
+                        <Button variant="dark" onClick={datacall}>
+                            gay
                         </Button>
                     </div>
                     <Plot
