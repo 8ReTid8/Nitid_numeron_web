@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { Button, Container, Form, Table,Row } from "react-bootstrap";
 import { evaluate } from 'mathjs'
 import Plot from 'react-plotly.js'
@@ -97,12 +97,15 @@ const Bisection =()=>{
     const [valueXm, setValueXm] = useState([]);
     const [valueXr, setValueXr] = useState([]);
     
-    const [test , settest] = useState();
+    const [test , settest] = useState([]);
     const datacall=async()=>{
         axios.get("http://localhost:1987/Bisection").then((res)=>settest(res.data))
     }
+    useEffect(()=>{
+        axios.get("http://localhost:1987/Bisection").then((res)=>settest(res.data))
+    },[])
 
-    console.log(test[0].fx)
+    console.log(test)
 
     const [html, setHtml] = useState(null);
     const [Equation,setEquation] = useState("(x^4)-13")

@@ -13,6 +13,11 @@ app.get("/Bisection",(req,res)=>{
         res.json(result)
     })
 })
+app.get("/grap_one_newton",(req,res)=>{
+    database.query("select * from grap_one_newton",(err,result)=>{
+        res.json(result)
+    })
+})
 
 app.listen(1987,()=>{
     console.log("run gay")
