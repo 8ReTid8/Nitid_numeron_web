@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react"
 import { Button, Container, Form, Table,Row } from "react-bootstrap";
-import { evaluate } from 'mathjs'
+import { evaluate, number } from 'mathjs'
 import Plot from 'react-plotly.js'
 import axios from 'axios'
+import Recentdata from '../../components/Recentdata'
+import { CiAlarmOn } from "react-icons/ci";
 const Bisection =()=>{
     const print = () =>{
         console.log(datatable)
@@ -98,17 +100,24 @@ const Bisection =()=>{
     const [valueXr, setValueXr] = useState([]);
     
     const [test , settest] = useState([]);
+
     const datacall=async()=>{
-        axios.get("http://localhost:1987/Bisection").then((res)=>settest(res.data))
+        // axios.get("http://localhost:1987/Bisection").then((res)=>settest(res.data))
+        setEquation(test[0].fx);
+        setXL((number)(test[0].xl));
+        setXR((number)(test[0].xr));
+      
     }
+    
+    
     useEffect(()=>{
         axios.get("http://localhost:1987/Bisection").then((res)=>settest(res.data))
     },[])
 
-    console.log(test)
+    
 
     const [html, setHtml] = useState(null);
-    const [Equation,setEquation] = useState("(x^4)-13")
+    const [Equation,setEquation] = useState()
     const [X,setX] = useState(0)
     const [XL,setXL] = useState(0)
     const [XR,setXR] = useState(0)
@@ -151,18 +160,22 @@ const Bisection =()=>{
                     </Form.Group>
                     <Form.Group className="mb-3" as={Row}>    
                         <Form.Label>Input XL</Form.Label>
-                        <input type="number" id="XL" onChange={inputXL} style={{width:"100%", margin:"0 auto"}} className="form-control"></input>
+                        <input type="number" id="XL" value={XL} onChange={inputXL} style={{width:"100%", margin:"0 auto"}} className="form-control"></input>
                     </Form.Group>  
                     <Form.Group className="mb-3" as={Row}>  
                         <Form.Label>Input XR</Form.Label>
-                        <input type="number" id="XR" onChange={inputXR} style={{width:"100%", margin:"0 auto"}} className="form-control"></input>
+                        <input type="number" id="XR" value={XR} onChange={inputXR} style={{width:"100%", margin:"0 auto"}} className="form-control"></input>
                     </Form.Group>
                     <div className="alignown">
                         <Button variant="dark" onClick={calculateRoot}>
                             Calculate
                         </Button>
-                        <Button variant="dark" onClick={datacall}>
+                        {/* <Button variant="dark" >
                             gay
+                        </Button> */}
+                        {/* <Recentdata onClick={datacall}></Recentdata> */}
+                        <Button variant="dark" onClick={datacall}>
+                            <CiAlarmOn size="25px"/>
                         </Button>
                     </div>
                     <Plot

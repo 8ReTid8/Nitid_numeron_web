@@ -2,9 +2,6 @@ import {Navbar,NavDropdown,Nav,Container} from "react-bootstrap"
 
 function myNavbar() {
 
-    // const navbarStyle = {
-    //     color: 'your-font-color',
-    // };
     const navLinkStyle = {color: "white"};
     
 
