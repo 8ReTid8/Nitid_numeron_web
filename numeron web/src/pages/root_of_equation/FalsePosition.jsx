@@ -82,12 +82,14 @@ const FalsePosition = () => {
     const [test, settest] = useState([]);
 
     const datacall = async () => {
-        // axios.get("http://localhost:1987/Bisection").then((res)=>settest(res.data))
-        console.log(test)
+        axios.get("http://localhost:1987/Bisection").then((res)=>settest(res.data))
+    }
+
+    useEffect(() => {
         setEquation(test[0].fx);
         setXL((number)(test[0].xl));
         setXR((number)(test[0].xr));
-    }
+    }, [test])
 
     useEffect(() => {
         axios.get("http://localhost:1987/Bisection").then((res) => settest(res.data))
