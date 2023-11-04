@@ -3,7 +3,6 @@ import { Button, Container, Form, Table,Row } from "react-bootstrap";
 import { evaluate, number } from 'mathjs'
 import Plot from 'react-plotly.js'
 import axios from 'axios'
-import Recentdata from '../../components/Recentdata'
 import { CiAlarmOn } from "react-icons/ci";
 const Bisection =()=>{
     const print = () =>{
@@ -170,10 +169,7 @@ const Bisection =()=>{
                         <Button variant="dark" onClick={calculateRoot}>
                             Calculate
                         </Button>
-                        {/* <Button variant="dark" >
-                            gay
-                        </Button> */}
-                        {/* <Recentdata onClick={datacall}></Recentdata> */}
+                        
                         <Button variant="dark" onClick={datacall}>
                             <CiAlarmOn size="25px"/>
                         </Button>
