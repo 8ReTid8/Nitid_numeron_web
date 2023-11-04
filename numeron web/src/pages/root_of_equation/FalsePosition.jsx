@@ -89,7 +89,6 @@ const FalsePosition = () => {
         setXR((number)(test[0].xr));
     }
 
-
     useEffect(() => {
         axios.get("http://localhost:1987/Bisection").then((res) => settest(res.data))
     }, [])
