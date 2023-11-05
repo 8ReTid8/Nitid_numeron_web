@@ -102,12 +102,12 @@ const Bisection =()=>{
 
     const datacall=async()=>{
         // axios.get("http://localhost:1987/Bisection").then((res)=>settest(res.data))
-        setEquation(test[0].fx);
-        setXL((number)(test[0].xl));
-        setXR((number)(test[0].xr));
+        let i = Math.floor((Math.random()*test.length))
+        setEquation(test[i].fx);
+        setXL(test[i].xl);
+        setXR(test[i].xr);
       
     }
-    
     
     useEffect(()=>{
         axios.get("http://localhost:1987/Bisection").then((res)=>settest(res.data))

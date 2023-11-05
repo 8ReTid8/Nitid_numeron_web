@@ -78,23 +78,26 @@ const FalsePosition = () => {
     const [ans, setans] = useState(0)
     const [XL, setXL] = useState(0)
     const [XR, setXR] = useState(0)
-
     const [test, settest] = useState([]);
 
-    const datacall = async () => {
-        axios.get("http://localhost:1987/Bisection").then((res)=>settest(res.data))
+    const datacall=async()=>{
+        let i = Math.floor((Math.random()*test.length))
+        setEquation(test[i].fx);
+        setXL(test[i].xl);
+        setXR(test[i].xr);
     }
 
     useEffect(() => {
-        setEquation(test[0].fx);
-        setXL((number)(test[0].xl));
-        setXR((number)(test[0].xr));
-    }, [test])
-
-    useEffect(() => {
-        axios.get("http://localhost:1987/Bisection").then((res) => settest(res.data))
+        axios.get("http://localhost:1987/Bisection").then((res) => settest(res.data)) 
     }, [])
 
+    const savedata=async()=>{
+        axios.post("http://localhost:1987/saveBisection",{Equation,XL,XR}).then((res)=>console.log(res))
+    }
+
+    
+   
+    
     const inputEquation = (event) => {
         setEquation(event.target.value)
     }
@@ -138,6 +141,9 @@ const FalsePosition = () => {
                         </Button>
                         <Button variant="dark" onClick={datacall}>
                             <CiAlarmOn size="25px" />
+                        </Button>
+                        <Button variant="dark" onClick={savedata}>
+                            Save
                         </Button>
                     </div>
                     <Plot

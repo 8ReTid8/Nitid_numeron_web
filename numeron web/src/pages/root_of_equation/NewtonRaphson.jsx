@@ -1,7 +1,9 @@
-import { useState } from "react"
+import { useState,useEffect } from "react"
 import { Button, Container, Form, Table,Row } from "react-bootstrap";
 import { evaluate,derivative } from 'mathjs'
 import Plot from 'react-plotly.js';
+import axios from "axios";
+import { CiAlarmOn } from "react-icons/ci";
 const NewtonRaphson =()=>{
     const print = () =>{
         console.log(data)
@@ -61,6 +63,21 @@ const NewtonRaphson =()=>{
     const [Equation,setEquation] = useState("(x^2)-7")
     const [ans,setans] = useState(0)
     const [X0,setX0] = useState(0)
+
+    const [test , settest] = useState([]);
+
+    const datacall=async()=>{
+        // axios.get("http://localhost:1987/Bisection").then((res)=>settest(res.data))
+        let i = Math.floor((Math.random()*test.length))
+        setEquation(test[i].fx);
+        setX0(test[i].x);
+      
+    }
+    
+    useEffect(()=>{
+        axios.get("http://localhost:1987/grap_one_newton").then((res)=>settest(res.data))
+    },[])
+
     
 
     const inputEquation = (event) =>{
@@ -90,13 +107,14 @@ const NewtonRaphson =()=>{
                         </Form.Group>
                         <Form.Group className="mb-3" as={Row}>    
                             <Form.Label>Input X0</Form.Label>
-                            <input type="number" id="XL" onChange={inputX0} style={{width:"100%", margin:"0 auto"}} className="form-control"></input>
+                            <input type="number" id="XL" value={X0} onChange={inputX0} style={{width:"100%", margin:"0 auto"}} className="form-control"></input>
                         </Form.Group>  
 
                         <div className="alignown">
                             <Button variant="dark" onClick={calculateNewton}>
                                 Calculate
                             </Button>
+                            <Button variant="dark" onClick={datacall}><CiAlarmOn size="25px"/></Button>
                         </div>
                         <Plot
                         data={[

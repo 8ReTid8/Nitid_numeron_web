@@ -1,12 +1,26 @@
-import { useState } from 'react'
+import { useState,useEffect } from 'react'
 import { Container, Row, Form, Button, Col } from 'react-bootstrap'
-
+import axios from 'axios'
+import { CiAlarmOn } from 'react-icons/ci'
 export default function Inputdiff({ cal }) {
     const [Met,setMet] = useState(0)
     const [Diff, setDiff] = useState(1)
     const [X, setX] = useState()
     const [H, setH] = useState()
     const [Equation, setEquation] = useState("e^x")
+
+    const [mydata,setmydata] = useState([]);
+    
+    const datacall=async()=>{
+        let i = Math.floor((Math.random()*mydata.length))
+        setEquation(mydata[i].fx);
+        setX(mydata[i].x);
+        setH(mydata[i].h);
+    }
+
+    useEffect(() => {
+        axios.get("http://localhost:1987/ddoh").then((res) => setmydata(res.data)) 
+    }, [])
 
     const throwinput = () => {
         cal(Diff, X, H, Equation, Met)
@@ -50,6 +64,7 @@ export default function Inputdiff({ cal }) {
                             <Button variant="dark" onClick={throwinput}>
                                 Calculate
                             </Button>
+                            <Button variant="dark" onClick={datacall}><CiAlarmOn size="25px"/></Button>
                         </div>
                     </Form.Group>
                 </Form>
