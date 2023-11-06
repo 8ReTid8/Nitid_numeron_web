@@ -1,15 +1,28 @@
-import { useState } from 'react'
+import { useState,useEffect } from 'react'
 import { Container, Row, Form, Button, Col } from 'react-bootstrap'
-
+import { CiAlarmOn } from 'react-icons/ci';
+import axios from 'axios';
 export default function InputX_Fx({ cal }) {
     const [size, setsize] = useState(5)
-    const [X, setX] = useState(new Array(size).fill(0))
-    const [Fx, setFx] = useState(new Array(size).fill(0))
-    const [sizeInput, setSizeInput] = useState(5);
-    const [Xfind,setxfind] = useState();
+    const [X, setX] = useState([0, 0, 0, 0, 0])
+    const [Fx, setFx] = useState([0, 0, 0, 0, 0])
+    const [Xfind, setxfind] = useState();
+    const [mydata, setmydata] = useState([])
+
+    useEffect(() => {
+        axios.get("http://localhost:1987/interextra").then((res) => setmydata(res.data))
+    }, [])
+
+    const datacall = async () => {
+        let i = Math.floor((Math.random() * mydata.length))
+        setsize(mydata[i].size)
+        setxfind(mydata[i].xfind)
+        setX(JSON.parse(mydata[i].x))
+        setFx(JSON.parse(mydata[i].fx));
+    }
 
     const throwinput = () => {
-        cal(size, X, Fx,Xfind)
+        cal(size, X, Fx, Xfind)
     }
     const handleXChange = (rowIndex, event) => {
         const newValue = parseFloat(event.target.value);
@@ -17,7 +30,7 @@ export default function InputX_Fx({ cal }) {
         newX[rowIndex] = newValue;
         setX(newX);
     };
-    console.log(Xfind)
+    console.log(mydata)
 
     const handleFxChange = (rowIndex, event) => {
         const newValue = parseFloat(event.target.value);
@@ -27,9 +40,8 @@ export default function InputX_Fx({ cal }) {
     };
 
     const handleSizeSubmit = () => {
-        setsize(sizeInput);
-        setFx(new Array(sizeInput).fill(0));
-        setX(new Array(sizeInput).fill(0));
+        setFx(new Array(size).fill(0));
+        setX(new Array(size).fill(0));
     };
     return (
         <Container>
@@ -37,18 +49,19 @@ export default function InputX_Fx({ cal }) {
                 <Form>
                     <Form.Group className="mb-3" as={Row}>
                         <Form.Label>Input size</Form.Label>
-                        <input type="number" value={sizeInput} onChange={(e) => setSizeInput(parseInt(e.target.value))} style={{ width: "100%", margin: "0 auto" }} className="form-control"></input>
+                        <input type="number" value={size} onChange={(e) => setsize(parseInt(e.target.value))} style={{ width: "100%", margin: "0 auto" }} className="form-control"></input>
                     </Form.Group>
-                    
+
                     <Form.Group className="mb-3" as={Row}>
                         <div className="alignown">
                             <Button variant="dark" onClick={handleSizeSubmit}>
                                 Submit
                             </Button>
+                            <Button variant="dark" onClick={datacall}><CiAlarmOn size="25px" /></Button>
                         </div>
                     </Form.Group>
                     <Form.Group className="mb-3" as={Row}>
-                      
+
                         <Col>
                             <Form.Label>X</Form.Label>
                             {X.map((cell, rowIndex) => (

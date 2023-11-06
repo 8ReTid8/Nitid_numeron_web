@@ -13,11 +13,6 @@ app.get("/Bisection",(req,res)=>{
         res.json(result)
     })
 })
-// app.post("/saveBisection"),(req,res)=>{
-//     database.query(`insert into bisection (fx,xl,xr) values ('${req.fx}','${req.xl}','${req.xr}')`,(err)=>{
-//         console.log(err)
-//     })
-// }
 app.post("/saveBisection", (req, res) => {
     const {Equation,XL,XR} = req.body
     database.query(`INSERT INTO bisection (fx, xl, xr) VALUES ('${Equation}', '${XL}', '${XR}')`, (err) => {
@@ -46,9 +41,28 @@ app.get("/matrix",(req,res)=>{
         res.json(result)
     })
 })
-
+app.get("/matrixiter",(req,res)=>{
+    database.query("select * from matrixIter",(err,result)=>{
+        res.json(result)
+    })
+})
 app.get("/composimp",(req,res)=>{
     database.query("select * from composimp",(err,result)=>{
+        res.json(result)
+    })
+})
+app.get("/interextra",(req,res)=>{
+    database.query("select * from interextra",(err,result)=>{
+        res.json(result)
+    })
+})
+app.get("/polyregress",(req,res)=>{
+    database.query("select * from polyregress",(err,result)=>{
+        res.json(result)
+    })
+})
+app.get("/multiregress",(req,res)=>{
+    database.query("select * from multiregress",(err,result)=>{
         res.json(result)
     })
 })

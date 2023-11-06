@@ -2,52 +2,27 @@ import { useState, useEffect } from 'react'
 import { Container, Row, Form, Button, Col, FormLabel } from 'react-bootstrap'
 import { CiAlarmOn } from 'react-icons/ci';
 import axios from 'axios';
-import { number } from 'mathjs';
 export default function InputMatrix({ cal }) {
   const [size, setSize] = useState(3);
-  const [sizeInput, setSizeInput] = useState(3);
-  const [matrix, setMatrix] = useState([])
-  const [B, setB] = useState(new Array(size).fill(0))
-  const [X, setX] = useState([])
+  const [matrix, setMatrix] = useState([[0, 0, 0], [0, 0, 0], [0, 0, 0]])
+  const [B, setB] = useState([0, 0, 0])
   const [mydata, setmydata] = useState([])
 
-  const throwinput = () => {
-    cal(size, matrix, B)
-  }
   useEffect(() => {
     axios.get("http://localhost:1987/matrix").then((res) => setmydata(res.data))
   }, [])
 
-  useEffect(() => {
-    const newMatrix = [];
-
-    for (let i = 0; i < size; i++) {
-      const row = [];
-      for (let j = 0; j < size; j++) {
-        row.push(0); // Initialize all cells to 0
-      }
-      newMatrix.push(row);
-    }
-    setMatrix(newMatrix);
-
-  }, [size]);
-
   const datacall = async () => {
     let i = Math.floor((Math.random() * mydata.length))
-    // setSizeInput((number)(mydata[i].size));
-    setSize((mydata[i].size))
-    // handleSizeSubmit()
-    // setMatrix(mydata[i].mat);
-    // setB(mydata[i].b);
+    setSize(mydata[i].size)
+    setMatrix(JSON.parse(mydata[i].mat))
+    setB(JSON.parse(mydata[i].b));
   }
 
-  console.log(size)
-  // const inputSize = (event) => {
-  //   const newSize = parseInt(event.target.value);
-  //   setSize(newSize);
-  //   setB(new Array(newSize).fill(0));
-  // };
-
+  const throwinput = () => {
+    cal(size, matrix, B)
+  }
+  
   const handleMatrixChange = (rowIndex, colIndex, event) => {
     const newValue = parseFloat(event.target.value);
     const newMatrix = [...matrix];
@@ -55,16 +30,24 @@ export default function InputMatrix({ cal }) {
     setMatrix(newMatrix);
   };
 
-
   const handleBChange = (rowIndex, event) => {
     const newValue = parseFloat(event.target.value);
     const newB = [...B];
     newB[rowIndex] = newValue;
     setB(newB);
   };
+
   const handleSizeSubmit = () => {
-    setSize(sizeInput);
-    setB(new Array(sizeInput).fill(0));
+    const newMatrix = [];
+    for (let i = 0; i < size; i++) {
+      const row = [];
+      for (let j = 0; j < size; j++) {
+        row.push(0);
+      }
+      newMatrix.push(row);
+    }
+    setMatrix(newMatrix);
+    setB(new Array(size).fill(0));
   };
 
   return (
@@ -73,7 +56,7 @@ export default function InputMatrix({ cal }) {
         <Form>
           <Form.Group className="mb-3" as={Row}>
             <Form.Label>Input size</Form.Label>
-            <input type="number" value={sizeInput} onChange={(e) => setSizeInput(parseInt(e.target.value))} style={{ width: "100%", margin: "0 auto" }} className="form-control"></input>
+            <input type="number" value={size} onChange={(e) => setSize(parseInt(e.target.value))} style={{ width: "100%", margin: "0 auto" }} className="form-control"></input>
           </Form.Group>
           <Form.Group className="mb-3" as={Row}>
             <div className="alignown">
@@ -139,3 +122,23 @@ export default function InputMatrix({ cal }) {
     </Container>
   )
 }
+
+// useEffect(() => {
+  //   const newMatrix = [];
+
+  //   for (let i = 0; i < size; i++) {
+  //     const row = [];
+  //     for (let j = 0; j < size; j++) {
+  //       row.push(0);
+  //     }
+  //     newMatrix.push(row);
+  //   }
+  //   setMatrix(newMatrix);
+  //   setB(new Array(size).fill(0));
+  // }, [size]);
+
+  // const datacall=async()=>{
+  //   axios.get("http://localhost:1987/matrix").then((res) => {
+  //   console.log(res.data)  
+  //   setMatrix(JSON.parse(res.data[0].mat))})
+  // }

@@ -28,7 +28,7 @@ import MultipleLinearRegression from './pages/regression/MultipleLinearRegressio
 import Spline from './pages/inter_and_extra/Spline';
 import DD_oh from './pages/inter_and_diff/DD_oh';
 import DD_oh2 from './pages/inter_and_diff/DD_oh2';
-import Recentdata from './components/Recentdata';
+
 function App() {
   const [count, setCount] = useState(0)
 
