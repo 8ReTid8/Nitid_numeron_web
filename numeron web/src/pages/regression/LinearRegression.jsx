@@ -4,6 +4,7 @@ import { Container } from 'react-bootstrap'
 
 export default function LinearRegression() {
     const [ans, setans] = useState()
+    const [show, setshow] = useState([[]])
     let m
     let a
     let sumx
@@ -14,31 +15,26 @@ export default function LinearRegression() {
     const calreg = (size, X, Fx, Xfind, M) => {
         m = M + 1
         a = new Array(m).fill(0)
-        sumx = new Array(m+(m-1)).fill(0)
+        sumx = new Array(m + (m - 1)).fill(0)
         sumxy = new Array(m).fill(0)
         mat = []
         x = [...X]
         fx = [...Fx]
-        // for (let i = 0; i < m; i++) {
-        //     const addmat = []
-        //     for (let j = 0; j < m; j++) {
-        //         addmat.push(0)
-        //     }
-        //     mat.push(addmat)
-        // }
+
         addsum(size)
-        console.log(sumx)
+        console.log(show)
         gauss_jaordan()
         addx(Xfind)
     }
-    const addx=(Xfind)=>{
-        let sum=0;
-        for(let i=0;i<m;i++){
-            sum += a[i]*Math.pow(Xfind, i);
+    const addx = (Xfind) => {
+        let sum = 0;
+        for (let i = 0; i < m; i++) {
+            sum += a[i] * Math.pow(Xfind, i);
         }
         setans(sum)
     }
     const addsum = (size) => {
+        const temp = [];
         for (let i = 0; i < m; i++) {
             for (let j = 0; j < size; j++) {
                 sumxy[i] += fx[j] * Math.pow(x[j], i);
@@ -51,13 +47,18 @@ export default function LinearRegression() {
         }
         for (let i = 0; i < m; i++) {
             const addmat = []
+            const addmat2 = []
             for (let j = 0; j < m; j++) {
-                // System.out.println(j+i);
                 addmat.push(sumx[j + i]);
+                addmat2.push(sumx[j + i]);
             }
             mat.push(addmat)
+            temp.push(addmat2)
         }
+        // console.log(temp)
+        setshow(temp)
     }
+
     const gauss_jaordan = () => {
         for (let i = 0; i < m; ++i) {
             for (let j = i + 1; j < m; ++j) {
@@ -95,6 +96,11 @@ export default function LinearRegression() {
             <div className='layout'><h1>Polynomial Regression</h1></div>
             <InputReg cal={calreg}></InputReg>
             <h5>Answer : {ans}</h5>
+            <div className='layoutregress'>
+                {show.map((row, rowIndex) => {
+                    return <p key={rowIndex}>{`[${row}]`}</p>
+                })}
+            </div>
         </Container>
     )
 }

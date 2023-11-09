@@ -38,5 +38,13 @@
 .layoutrecentdata{
     display: flex;
     justify-content: right;
-    
+}
+
+.layoutregress{
+    font-size: 25px;
+    margin: 0 auto;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    text-align: center;
+    font-family: "Silkscreen";
 }
